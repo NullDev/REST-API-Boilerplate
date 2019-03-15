@@ -27,6 +27,9 @@ let rootHandler = require("./services/rootHandler");
 let v1 = require("./routes/routerV1");
 let v2 = require("./routes/routerV1");
 
+let robotsHandler = require("./services/robotsHandler");
+let err404Handler = require("./services/err404Handler");
+
 let version = conf.getVersion();
 let appname = conf.getName();
 let devname = conf.getAuthor();
@@ -70,7 +73,12 @@ app.use("/v2", v2);
 
 app.get("/", rootHandler);
 
+// Handler
+app.get("/robots.txt", robotsHandler);
+
 // Errors
+app.get("*", err404Handler);
+
 process.on("unhandledRejection", (err, promise) => {
     log.error(`Unhandled rejection (promise: ${promise}, reason: ${err})`);
 });
