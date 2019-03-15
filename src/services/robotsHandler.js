@@ -5,7 +5,7 @@
 // ========================= //
 
 // Utils
-let config = require("../../utils/configHandler").getConfig();
+let config = require("../utils/configHandler").getConfig();
 
 /**
  * Generate robots.txt
@@ -24,7 +24,6 @@ module.exports = function(req, res){
         "# Therefore it is prohibited.\n\n" +
         "user-agent: *\n" +
         "Allow: /$\n" +
-        "Disallow: /\n\n" +
-        "Sitemap: /sitemap.xml\n"
+        "Disallow: /\n"
     );
 };
