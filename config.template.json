@@ -1,5 +1,8 @@
 {
     "server": {
         "port": 1337
+    },
+    "meta": {
+        "name": "Mock API"
     }
 }
