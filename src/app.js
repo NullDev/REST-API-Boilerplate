@@ -22,10 +22,12 @@ let meta = require("./utils/meta");
 // Services
 let portHandler = require("./services/portCheck");
 let rootHandler = require("./services/rootHandler");
+let RateLimiter = require("./services/rateLimiter");
+let getRoutes = require("./services/getRoutes");
 
 // Endpoints
 let v1 = require("./routes/routerV1");
-let v2 = require("./routes/routerV1");
+let v2 = require("./routes/routerV2");
 
 let robotsHandler = require("./services/robotsHandler");
 let err404Handler = require("./services/err404Handler");
@@ -66,6 +68,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.resolve("src", "assets", "favicon.png")));
+app.use(new RateLimiter());
 
 // API's
 app.use("/v1", v1);
@@ -78,6 +81,11 @@ app.get("/robots.txt", robotsHandler);
 
 // Errors
 app.get("*", err404Handler);
+
+let routes = getRoutes(app);
+for (let i in routes){
+    log.info(`Route ${routes[i].path} registered with methods ${(routes[i].methods).join(", ")}`);
+}
 
 process.on("unhandledRejection", (err, promise) => {
     log.error(`Unhandled rejection (promise: ${promise}, reason: ${err})`);
