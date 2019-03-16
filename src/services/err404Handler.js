@@ -11,5 +11,5 @@ module.exports = function(req, res, app){
 
     res.set({
         "Content-Type": "application/json; charset=utf-8"
-    }).status(200).send(respone);
+    }).status(404).send(respone);
 };
