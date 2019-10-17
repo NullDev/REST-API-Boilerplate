@@ -5,12 +5,12 @@
 // ========================= //
 
 module.exports = function(req, res, app){
-    let respone = {
+    let response = {
         "status": "ok",
         "api_version": "v1"
     };
 
     res.set({
         "Content-Type": "application/json; charset=utf-8"
-    }).status(200).send(respone);
+    }).status(200).send(response);
 };
