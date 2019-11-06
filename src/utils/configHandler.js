@@ -33,7 +33,7 @@ let validJson = function(obj){
 /**
  * Reads out config data
  *
- * @returns {string} JSON Content
+ * @returns {object} JSON Content
  */
 let getconfig = function(){
     if (!fs.existsSync(configPath)){
